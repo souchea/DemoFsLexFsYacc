@@ -1,5 +1,6 @@
 ﻿namespace FsLexYacc.Demo
 
+open System
 open System.Text
 open System.Collections.Generic
 open Parser
@@ -10,7 +11,7 @@ open FsLexYacc.Parser
 
 module FsLexYacc = 
 
-    let ParseMyValue value (props: Dictionary<string, string>) =
+    let ParseMyValue value (props: (string * string) list) =
         try
             match value with
             | ""    -> ""
@@ -38,5 +39,18 @@ module FsLexYacc =
 
     [<EntryPoint>]
     let main argv = 
-        printfn "%A" argv
-        0 // return an integer exit code
+        let mutable props = [("company" , "Microsoft");
+                             ("address", "Redmond");
+                             ("number", "12345")];
+
+        Console.Write("Enter your sentence: ")
+
+        let input = Console.ReadLine()
+ 
+        let result = ParseMyValue input props
+
+        Console.WriteLine("Result: {0}", result)
+ 
+        Console.ReadLine() |> ignore
+
+        0

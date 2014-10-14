@@ -43,9 +43,17 @@ module Parser =
     // Parsing of the result from the lexer
     // Recursive function
     //
-    let GetStringFromExpr value (properties: Dictionary<string, string>) =
+    let GetStringFromExpr value (properties: (string * string) list) =
         try
-            let rec GetStringFromExprRec value (properties: Dictionary<string, string>) =
+            let GetValueFromKey (properties: (string * string) list) key =
+                let rec FindKey properties keyToFind =
+                    match properties with
+                    | head::tail    -> match head with
+                                        | (key: string, value: string) -> if key.Equals(keyToFind) then value 
+                                                                          else FindKey tail key                                                  
+                    | [] | _        -> ""
+                in FindKey properties key
+            let rec GetStringFromExprRec value (properties: (string * string) list) =
                 match value with
                 | Val(line)                 -> line
                 | Parent(line)              -> GetStringFromExprRec line properties
@@ -53,8 +61,7 @@ module Parser =
                 | Float(nb)                 -> nb.ToString()
                 | Concat(expr1, expr2)      -> (GetStringFromExprRec expr1 properties) + (GetStringFromExprRec expr2 properties)
                 | SubVal(line, nb1, nb2)    -> (GetStringFromExprRec line properties).Substring(nb1, nb2)
-                | Var(line)                 -> properties.Item(GetStringFromExprRec line properties)
-                | VarDate(date, format)     -> properties.Item(GetStringFromExprRec (Val(date.ToString(format))) properties)
+                | Var(line)                 -> GetValueFromKey properties (GetStringFromExprRec line properties)
                 | Or(cond1, cond2)          -> CheckOrCond ((GetStringFromExprRec cond1 properties), (GetStringFromExprRec cond2 properties))
                 | And(cond1, cond2)         -> CheckAndCond ((GetStringFromExprRec cond1 properties), (GetStringFromExprRec cond2 properties))
                 | IfThen(cond, ifcond)      ->

@@ -7,7 +7,6 @@ type Expr =
     | And     of Expr * Expr
     | Int     of int
     | Float   of float
-    | VarDate of System.DateTime * string
     | Var     of Expr
     | Parent  of Expr
     | IfThen  of Expr * Expr
