@@ -63,7 +63,7 @@
     <None Include="app.config" />
     <None Include="Parser.fsy" />
     <FsYacc Include="Parser.fsy">
-      <OtherFlags>module FsLexYacc.Parser</OtherFlags>
+      <OtherFlags>--module FsLexYacc.Parser</OtherFlags>
     </FsYacc>
     <FsLex Include="Lexer.fsl">
       <OtherFlags>--unicode</OtherFlags>

@@ -76,4 +76,4 @@ module Parser =
                 | Function(funcName, par1, par2) -> GetCondResult funcName (GetStringFromExprRec par1 properties) (GetStringFromExprRec par2 properties)
             GetStringFromExprRec value properties
         with
-            | _ -> failwith "Error in parsing in Ast Reading"
+            | _ -> failwith "Error in Ast Reading"
