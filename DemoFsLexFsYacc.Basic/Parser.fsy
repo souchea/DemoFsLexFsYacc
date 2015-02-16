@@ -1,0 +1,24 @@
+﻿ %{
+ open FsLexYacc.Basic.Ast
+ %}
+
+ %start start
+
+ %token <System.Int32> INT
+ %token EOF MINUS PLUS
+ 
+ %type < FsLexYacc.Basic.Ast.ParsedLine > start
+
+ %%
+
+ start: ParsedLine { $1 }
+
+ ParsedLine: ExprList { ParsedLine($1) }
+
+ Expr: INT				{ Int($1) }
+	 | Expr MINUS Expr	{ Minus($1, $3) }
+	 | Expr PLUS Expr	{ Plus($1, $3) }
+
+
+ExprList: Expr { [$1] }
+		| ExprList Expr { $2 :: $1  }

@@ -1,0 +1,20 @@
+﻿{   
+module FsLexYacc.Basic.Lexer
+open FsLexYacc.Basic.Parser
+open FsLexYacc.Basic.Ast
+open System
+open Microsoft.FSharp.Text.Lexing
+}
+
+ let digit = ['0'-'9']
+ let whitespace = [' ' '\t' ]
+ let newline = ('\n' | '\r' '\n')
+ let caracters = ['a'-'z' 'A'-'Z' '.' ',' '%' '#' '@' '/' '-' '>' '<' '_' '*' ';' '"']
+ let escapechar = [',']
+
+
+ rule token = parse
+ | "-"            { MINUS }
+ | "-"            { PLUS }
+ | ['-']?digit+   { INT (Int32.Parse(LexBuffer<_>.LexemeString lexbuf)) }
+ | eof			  { EOF }
