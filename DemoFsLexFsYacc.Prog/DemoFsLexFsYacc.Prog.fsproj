@@ -57,6 +57,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DemoFsLexFsYacc.Basic\DemoFsLexFsYacc.Basic.fsproj">
+      <Name>DemoFsLexFsYacc.Basic</Name>
+      <Project>{d129cb9b-3dd2-4ada-9312-47c0cadb7b44}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DemoFsLexFsYacc\DemoFsLexFsYacc.fsproj">
       <Name>DemoFsLexFsYacc</Name>
       <Project>{4439539a-8972-4ff7-ac15-84326a2e3f2d}</Project>

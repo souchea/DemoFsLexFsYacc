@@ -7,18 +7,18 @@
  %token <System.Int32> INT
  %token EOF MINUS PLUS
  
- %type < FsLexYacc.Basic.Ast.ParsedLine > start
+ %type < FsLexYacc.Basic.Ast.ParsedMathLine > start
 
  %%
 
- start: ParsedLine { $1 }
+ start: ParsedMathLine { $1 }
 
- ParsedLine: ExprList { ParsedLine($1) }
+ ParsedMathLine: ExprList { ParsedMathLine($1) }
 
- Expr: INT				{ Int($1) }
-	 | Expr MINUS Expr	{ Minus($1, $3) }
-	 | Expr PLUS Expr	{ Plus($1, $3) }
+ MathExpr: INT					{ Int($1) }
+	 | MathExpr MINUS MathExpr	{ Minus($1, $3) }
+	 | MathExpr PLUS MathExpr	{ Plus($1, $3) }
 
 
-ExprList: Expr { [$1] }
-		| ExprList Expr { $2 :: $1  }
+ExprList: MathExpr { [$1] }
+		| ExprList MathExpr { $2 :: $1  }

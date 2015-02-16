@@ -26,8 +26,8 @@ type tokenId =
 type nonTerminalId = 
     | NONTERM__startstart
     | NONTERM_start
-    | NONTERM_ParsedLine
-    | NONTERM_Expr
+    | NONTERM_ParsedMathLine
+    | NONTERM_MathExpr
     | NONTERM_ExprList
 
 // This function maps tokens to integers indexes
@@ -54,10 +54,10 @@ let prodIdxToNonTerminal (prodIdx:int) =
   match prodIdx with
     | 0 -> NONTERM__startstart 
     | 1 -> NONTERM_start 
-    | 2 -> NONTERM_ParsedLine 
-    | 3 -> NONTERM_Expr 
-    | 4 -> NONTERM_Expr 
-    | 5 -> NONTERM_Expr 
+    | 2 -> NONTERM_ParsedMathLine 
+    | 3 -> NONTERM_MathExpr 
+    | 4 -> NONTERM_MathExpr 
+    | 5 -> NONTERM_MathExpr 
     | 6 -> NONTERM_ExprList 
     | 7 -> NONTERM_ExprList 
     | _ -> failwith "prodIdxToNonTerminal: bad production index"
@@ -93,7 +93,7 @@ let _fsyacc_immediateActions = [|65535us; 49152us; 16385us; 65535us; 16387us; 65
 let _fsyacc_reductions ()  =    [| 
 # 94 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
-            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data :  FsLexYacc.Basic.Ast.ParsedLine )) in
+            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data :  FsLexYacc.Basic.Ast.ParsedMathLine )) in
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
@@ -102,15 +102,15 @@ let _fsyacc_reductions ()  =    [|
                  : '_startstart));
 # 103 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
-            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'ParsedLine)) in
+            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'ParsedMathLine)) in
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
 # 14 "Parser.fsy"
-                                          _1 
+                                              _1 
                    )
 # 14 "Parser.fsy"
-                 :  FsLexYacc.Basic.Ast.ParsedLine ));
+                 :  FsLexYacc.Basic.Ast.ParsedMathLine ));
 # 114 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
             let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'ExprList)) in
@@ -118,10 +118,10 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 16 "Parser.fsy"
-                                             ParsedLine(_1) 
+                                                 ParsedMathLine(_1) 
                    )
 # 16 "Parser.fsy"
-                 : 'ParsedLine));
+                 : 'ParsedMathLine));
 # 125 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
             let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : System.Int32)) in
@@ -129,54 +129,54 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 18 "Parser.fsy"
-                                     Int(_1) 
+                                          Int(_1) 
                    )
 # 18 "Parser.fsy"
-                 : 'Expr));
+                 : 'MathExpr));
 # 136 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
-            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'Expr)) in
-            let _3 = (let data = parseState.GetInput(3) in (Microsoft.FSharp.Core.Operators.unbox data : 'Expr)) in
+            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'MathExpr)) in
+            let _3 = (let data = parseState.GetInput(3) in (Microsoft.FSharp.Core.Operators.unbox data : 'MathExpr)) in
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
 # 19 "Parser.fsy"
-                                           Minus(_1, _3) 
+                                                   Minus(_1, _3) 
                    )
 # 19 "Parser.fsy"
-                 : 'Expr));
+                 : 'MathExpr));
 # 148 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
-            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'Expr)) in
-            let _3 = (let data = parseState.GetInput(3) in (Microsoft.FSharp.Core.Operators.unbox data : 'Expr)) in
+            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'MathExpr)) in
+            let _3 = (let data = parseState.GetInput(3) in (Microsoft.FSharp.Core.Operators.unbox data : 'MathExpr)) in
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
 # 20 "Parser.fsy"
-                                          Plus(_1, _3) 
+                                                  Plus(_1, _3) 
                    )
 # 20 "Parser.fsy"
-                 : 'Expr));
+                 : 'MathExpr));
 # 160 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
-            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'Expr)) in
+            let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'MathExpr)) in
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
 # 23 "Parser.fsy"
-                                      [_1] 
+                                          [_1] 
                    )
 # 23 "Parser.fsy"
                  : 'ExprList));
 # 171 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
             let _1 = (let data = parseState.GetInput(1) in (Microsoft.FSharp.Core.Operators.unbox data : 'ExprList)) in
-            let _2 = (let data = parseState.GetInput(2) in (Microsoft.FSharp.Core.Operators.unbox data : 'Expr)) in
+            let _2 = (let data = parseState.GetInput(2) in (Microsoft.FSharp.Core.Operators.unbox data : 'MathExpr)) in
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
 # 24 "Parser.fsy"
-                                         _2 :: _1  
+                                             _2 :: _1  
                    )
 # 24 "Parser.fsy"
                  : 'ExprList));
@@ -203,5 +203,5 @@ let tables () : Microsoft.FSharp.Text.Parsing.Tables<_> =
     numTerminals = 7;
     productionToNonTerminalTable = _fsyacc_productionToNonTerminalTable  }
 let engine lexer lexbuf startState = (tables ()).Interpret(lexer, lexbuf, startState)
-let start lexer lexbuf :  FsLexYacc.Basic.Ast.ParsedLine  =
+let start lexer lexbuf :  FsLexYacc.Basic.Ast.ParsedMathLine  =
     Microsoft.FSharp.Core.Operators.unbox ((tables ()).Interpret(lexer, lexbuf, 0))

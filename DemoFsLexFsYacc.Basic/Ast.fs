@@ -1,8 +1,8 @@
 ﻿namespace FsLexYacc.Basic.Ast
 
-type Expr = 
-    | Minus   of Expr * Expr
-    | Plus    of Expr * Expr
+type MathExpr = 
+    | Minus   of MathExpr * MathExpr
+    | Plus    of MathExpr * MathExpr
     | Int     of int
 
-type ParsedLine = ParsedLine of Expr list
+type ParsedMathLine = ParsedMathLine of MathExpr list
