@@ -89,7 +89,8 @@ module FsLexYacc =
         Console.WriteLine("")
         let funcToUse = (Console.ReadLine() |> GetFuncToUse)
 
-        Console.Write("Enter the input you want to parse: ")
+        Console.WriteLine("")
+        Console.WriteLine("Enter the input you want to parse: ")
         let result = Console.ReadLine() |> funcToUse
 
         Console.WriteLine("Result: {0}", result)
