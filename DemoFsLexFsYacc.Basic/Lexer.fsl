@@ -16,5 +16,5 @@ open Microsoft.FSharp.Text.Lexing
  rule token = parse
  | "-"            { MINUS }
  | "+"            { PLUS }
- | ['-']?digit+   { INT (Int32.Parse(LexBuffer<_>.LexemeString lexbuf)) }
+ | digit+		  { INT (Int32.Parse(LexBuffer<_>.LexemeString lexbuf)) }
  | eof			  { EOF }
